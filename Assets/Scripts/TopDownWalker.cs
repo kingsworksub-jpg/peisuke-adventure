@@ -16,6 +16,9 @@ public class TopDownWalker : MonoBehaviour
     const float JumpHeight = 0.45f;
     const float JumpDuration = 0.45f;
 
+    const float IdleBobAmplitude = 0.035f;
+    const float IdleBobSpeed = 2.2f;
+
     int facingDir = 0; // 0=Down, 1=Up, 2=Left, 3=Right
     Vector2 touchDir = Vector2.zero;
     bool isJumping = false;
@@ -95,6 +98,16 @@ public class TopDownWalker : MonoBehaviour
         {
             float scale = facingDir == 0 ? FrontScale : facingDir == 1 ? BackScale : SideScale;
             visual.localScale = new Vector3(scale, scale, 1f);
+
+            if (moving)
+            {
+                visual.localPosition = Vector3.zero;
+            }
+            else
+            {
+                float bob = Mathf.Sin(Time.time * IdleBobSpeed) * IdleBobAmplitude;
+                visual.localPosition = new Vector3(0f, bob, 0f);
+            }
         }
     }
 }
