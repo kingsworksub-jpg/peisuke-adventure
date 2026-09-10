@@ -27,7 +27,7 @@ public class PoopEffect : MonoBehaviour
         sr.sprite = poopSprite;
         sr.sortingOrder = 5;
 
-        Vector3 targetScale = new Vector3(0.35f, 0.35f, 1f);
+        Vector3 targetScale = new Vector3(3.5f, 3.5f, 1f);
         go.transform.localScale = Vector3.zero;
 
         float t = 0f;

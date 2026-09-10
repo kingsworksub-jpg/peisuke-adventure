@@ -21,7 +21,7 @@ public class PeisukeStats : MonoBehaviour
 
     public const int PoopThreshold = 10;
     public int poopMeter = 0;
-    const float StepLength = 0.4f; // world units per "step"
+    const float StepLength = 0.8f; // world units per "step" (~one full stride)
     float stepDistanceAccum = 0f;
 
     public Image hpBarFill;
