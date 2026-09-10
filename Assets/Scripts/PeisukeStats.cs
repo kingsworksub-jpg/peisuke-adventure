@@ -3,8 +3,23 @@ using UnityEngine.UI;
 
 public class PeisukeStats : MonoBehaviour
 {
+    public string characterName = "ペイスケ";
+    public int level = 1;
+    public int exp = 0;
+    public int expToNext = 100;
+
     public int maxHP = 50;
     public int currentHP = 50;
+    public int maxMP = 20;
+    public int currentMP = 20;
+
+    public int attack = 10;
+    public int defense = 8;
+    public int magicAttack = 6;
+    public int magicDefense = 6;
+    public int speed = 12;
+    public int luck = 5;
+
     public Image hpBarFill;
     public Image hpBarFillMenu;
     public Text hpText;
@@ -12,6 +27,7 @@ public class PeisukeStats : MonoBehaviour
     void Start()
     {
         currentHP = maxHP;
+        currentMP = maxMP;
         UpdateHPBar();
     }
 
