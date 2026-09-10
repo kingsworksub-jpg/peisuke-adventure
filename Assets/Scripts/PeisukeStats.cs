@@ -19,6 +19,23 @@ public class PeisukeStats : MonoBehaviour
     public int magicDefense = 6;
     public int speed = 12;
 
+    const int MaxTableLevel = 99;
+    static readonly int[] ExpTable = BuildExpTable(MaxTableLevel);
+
+    static int[] BuildExpTable(int maxLevel)
+    {
+        var table = new int[maxLevel + 1]; // 1-based: table[level] = EXP needed to clear that level
+        for (int lvl = 1; lvl <= maxLevel; lvl++)
+            table[lvl] = 100 + (lvl - 1) * 50;
+        return table;
+    }
+
+    static int GetExpToNextLevel(int lvl)
+    {
+        lvl = Mathf.Clamp(lvl, 1, MaxTableLevel);
+        return ExpTable[lvl];
+    }
+
     public const int PoopThreshold = 25;
     public int poopMeter = 0;
     const float StepLength = 0.8f; // world units per "step" (~one full stride)
@@ -38,6 +55,7 @@ public class PeisukeStats : MonoBehaviour
     {
         currentHP = maxHP;
         currentMP = maxMP;
+        expToNext = GetExpToNextLevel(level);
         UpdateHPBar();
         UpdatePoopBar();
         UpdateSnackText();
@@ -70,8 +88,38 @@ public class PeisukeStats : MonoBehaviour
 
     public void GoForWalk()
     {
+        if (poopMeter > 0)
+            GainExp(poopMeter);
         poopMeter = 0;
         UpdatePoopBar();
+    }
+
+    public void GainExp(int amount)
+    {
+        exp += amount;
+        while (exp >= expToNext)
+        {
+            exp -= expToNext;
+            LevelUp();
+        }
+    }
+
+    void LevelUp()
+    {
+        level++;
+        expToNext = GetExpToNextLevel(level);
+
+        maxHP += 5;
+        maxMP += 2;
+        attack += 2;
+        defense += 1;
+        magicAttack += 1;
+        magicDefense += 1;
+        speed += 1;
+
+        currentHP = maxHP;
+        currentMP = maxMP;
+        UpdateHPBar();
     }
 
     public void CollectSnack()
