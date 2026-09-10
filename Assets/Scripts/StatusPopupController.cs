@@ -16,6 +16,7 @@ public class StatusPopupController : MonoBehaviour
     public Text magicDefenseText;
     public Text speedText;
     public Text expText;
+    public Text snackText;
 
     public RadarChartRenderer radarChart;
     public float radarChartMaxValue = 20f;
@@ -50,6 +51,7 @@ public class StatusPopupController : MonoBehaviour
         if (magicDefenseText != null) magicDefenseText.text = $"まほうぼうぎょ  {stats.magicDefense}";
         if (speedText != null) speedText.text = $"すばやさ  {stats.speed}";
         if (expText != null) expText.text = $"EXP  {stats.exp} / {stats.expToNext}";
+        if (snackText != null) snackText.text = $"おやつ  {stats.snackCount}こ";
 
         if (radarChart != null)
         {

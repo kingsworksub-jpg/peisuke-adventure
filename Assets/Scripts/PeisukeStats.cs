@@ -24,6 +24,9 @@ public class PeisukeStats : MonoBehaviour
     const float StepLength = 0.8f; // world units per "step" (~one full stride)
     float stepDistanceAccum = 0f;
 
+    public int snackCount = 0;
+    public Text snackText;
+
     public Image hpBarFill;
     public Image hpBarFillMenu;
     public Text hpText;
@@ -37,6 +40,7 @@ public class PeisukeStats : MonoBehaviour
         currentMP = maxMP;
         UpdateHPBar();
         UpdatePoopBar();
+        UpdateSnackText();
     }
 
     public void ReportDistanceMoved(float distance)
@@ -68,6 +72,17 @@ public class PeisukeStats : MonoBehaviour
     {
         poopMeter = 0;
         UpdatePoopBar();
+    }
+
+    public void CollectSnack()
+    {
+        snackCount++;
+        UpdateSnackText();
+    }
+
+    void UpdateSnackText()
+    {
+        if (snackText != null) snackText.text = $"おやつ  {snackCount}こ";
     }
 
     void UpdatePoopBar()
