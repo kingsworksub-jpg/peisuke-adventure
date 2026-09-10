@@ -4,6 +4,9 @@ using System.Collections;
 public class PoopEffect : MonoBehaviour
 {
     public Transform spawnAnchor;
+    public GameOverController gameOverController;
+    public float pickupRadius = 0.45f;
+    public float explodeTime = 3f;
 
     Sprite poopSprite;
 
@@ -27,7 +30,7 @@ public class PoopEffect : MonoBehaviour
         sr.sprite = poopSprite;
         sr.sortingOrder = 5;
 
-        Vector3 targetScale = new Vector3(1.75f, 1.75f, 1f);
+        Vector3 targetScale = new Vector3(0.42f, 0.42f, 1f);
         go.transform.localScale = Vector3.zero;
 
         float t = 0f;
@@ -42,19 +45,38 @@ public class PoopEffect : MonoBehaviour
         }
         go.transform.localScale = targetScale;
 
-        yield return new WaitForSeconds(2.5f);
-
-        float fadeT = 0f;
-        float fadeDur = 0.6f;
-        var startColor = sr.color;
-        while (fadeT < fadeDur)
+        float waitT = 0f;
+        bool pickedUp = false;
+        while (waitT < explodeTime)
         {
-            fadeT += Time.deltaTime;
-            float a = Mathf.Lerp(1f, 0f, fadeT / fadeDur);
-            sr.color = new Color(startColor.r, startColor.g, startColor.b, a);
+            waitT += Time.deltaTime;
+            if (anchor != null && Vector3.Distance(anchor.position, go.transform.position) <= pickupRadius)
+            {
+                pickedUp = true;
+                break;
+            }
             yield return null;
         }
-        Destroy(go);
+
+        if (pickedUp)
+        {
+            float ct = 0f;
+            float cdur = 0.15f;
+            Vector3 startScale = go.transform.localScale;
+            while (ct < cdur)
+            {
+                ct += Time.deltaTime;
+                go.transform.localScale = Vector3.Lerp(startScale, Vector3.zero, ct / cdur);
+                yield return null;
+            }
+            Destroy(go);
+        }
+        else
+        {
+            Destroy(go);
+            if (gameOverController != null)
+                gameOverController.TriggerGameOver();
+        }
     }
 
     Sprite GeneratePoopSprite()
