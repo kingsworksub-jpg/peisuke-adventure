@@ -5,10 +5,11 @@ public class PoopEffect : MonoBehaviour
 {
     public Transform spawnAnchor;
     public GameOverController gameOverController;
-    public float pickupRadius = 0.45f;
     public float explodeTime = 3f;
 
     Sprite poopSprite;
+    bool walkSignalReceived = false;
+    bool poopActive = false;
 
     void Awake()
     {
@@ -20,8 +21,18 @@ public class PoopEffect : MonoBehaviour
         StartCoroutine(PoopRoutine());
     }
 
+    public void NotifyWalkButtonPressed()
+    {
+        walkSignalReceived = true;
+    }
+
+    public bool IsPoopActive() => poopActive;
+
     IEnumerator PoopRoutine()
     {
+        poopActive = true;
+        walkSignalReceived = false;
+
         var anchor = spawnAnchor != null ? spawnAnchor : transform;
         var go = new GameObject("Poop");
         go.transform.position = anchor.position + new Vector3(0f, 0.02f, 0f);
@@ -46,19 +57,15 @@ public class PoopEffect : MonoBehaviour
         go.transform.localScale = targetScale;
 
         float waitT = 0f;
-        bool pickedUp = false;
         while (waitT < explodeTime)
         {
-            waitT += Time.deltaTime;
-            if (anchor != null && Vector3.Distance(anchor.position, go.transform.position) <= pickupRadius)
-            {
-                pickedUp = true;
+            if (walkSignalReceived)
                 break;
-            }
+            waitT += Time.deltaTime;
             yield return null;
         }
 
-        if (pickedUp)
+        if (walkSignalReceived)
         {
             float ct = 0f;
             float cdur = 0.15f;
@@ -77,6 +84,8 @@ public class PoopEffect : MonoBehaviour
             if (gameOverController != null)
                 gameOverController.TriggerGameOver();
         }
+
+        poopActive = false;
     }
 
     Sprite GeneratePoopSprite()

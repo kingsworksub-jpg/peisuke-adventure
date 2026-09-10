@@ -27,7 +27,9 @@ public class PeisukeStats : MonoBehaviour
     public Image hpBarFill;
     public Image hpBarFillMenu;
     public Text hpText;
-    public Image poopBarFill;
+    public Image[] poopSegments;
+    public Color poopSegmentFilledColor = new Color(0.55f, 0.38f, 0.18f, 1f);
+    public Color poopSegmentEmptyColor = new Color(0.2f, 0.2f, 0.2f, 0.85f);
 
     void Start()
     {
@@ -70,7 +72,12 @@ public class PeisukeStats : MonoBehaviour
 
     void UpdatePoopBar()
     {
-        if (poopBarFill != null) poopBarFill.fillAmount = (float)poopMeter / PoopThreshold;
+        if (poopSegments == null) return;
+        for (int i = 0; i < poopSegments.Length; i++)
+        {
+            if (poopSegments[i] == null) continue;
+            poopSegments[i].color = i < poopMeter ? poopSegmentFilledColor : poopSegmentEmptyColor;
+        }
     }
 
     public void SetHP(int value)
