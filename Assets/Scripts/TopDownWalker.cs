@@ -8,6 +8,7 @@ public class TopDownWalker : MonoBehaviour
     public Transform visual;
     public LayerMask obstacleLayer;
     public float collisionRadius = 0.25f;
+    public PeisukeStats stats;
 
     const float FrontScale = 0.727f;
     const float BackScale = 0.682f;
@@ -81,7 +82,8 @@ public class TopDownWalker : MonoBehaviour
 
             Vector2 norm = dir.normalized;
             Vector2 delta = norm * moveSpeed * Time.deltaTime;
-            Vector2 pos = transform.position;
+            Vector2 startPos = transform.position;
+            Vector2 pos = startPos;
 
             Vector2 afterX = pos + new Vector2(delta.x, 0f);
             if (delta.x != 0f && !IsBlocked(afterX))
@@ -92,6 +94,9 @@ public class TopDownWalker : MonoBehaviour
                 pos = afterY;
 
             transform.position = new Vector3(pos.x, pos.y, transform.position.z);
+
+            if (stats != null)
+                stats.ReportDistanceMoved(Vector2.Distance(startPos, pos));
         }
 
         if (!isJumping)

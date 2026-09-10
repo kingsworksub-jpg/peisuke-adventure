@@ -18,17 +18,53 @@ public class PeisukeStats : MonoBehaviour
     public int magicAttack = 6;
     public int magicDefense = 6;
     public int speed = 12;
-    public int luck = 5;
+
+    public const int PoopThreshold = 10;
+    public int poopMeter = 0;
+    const float StepLength = 0.4f; // world units per "step"
+    float stepDistanceAccum = 0f;
 
     public Image hpBarFill;
     public Image hpBarFillMenu;
     public Text hpText;
+    public Image poopBarFill;
 
     void Start()
     {
         currentHP = maxHP;
         currentMP = maxMP;
         UpdateHPBar();
+        UpdatePoopBar();
+    }
+
+    public void ReportDistanceMoved(float distance)
+    {
+        stepDistanceAccum += distance;
+        while (stepDistanceAccum >= StepLength)
+        {
+            stepDistanceAccum -= StepLength;
+            OnStep();
+        }
+    }
+
+    void OnStep()
+    {
+        poopMeter++;
+        if (poopMeter >= PoopThreshold)
+        {
+            poopMeter = 0;
+            UpdatePoopBar();
+            GetComponent<PoopEffect>()?.PlayPoop();
+        }
+        else
+        {
+            UpdatePoopBar();
+        }
+    }
+
+    void UpdatePoopBar()
+    {
+        if (poopBarFill != null) poopBarFill.fillAmount = (float)poopMeter / PoopThreshold;
     }
 
     public void SetHP(int value)

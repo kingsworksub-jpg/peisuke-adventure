@@ -15,8 +15,10 @@ public class StatusPopupController : MonoBehaviour
     public Text magicAttackText;
     public Text magicDefenseText;
     public Text speedText;
-    public Text luckText;
     public Text expText;
+
+    public RadarChartRenderer radarChart;
+    public float radarChartMaxValue = 20f;
 
     public void Toggle()
     {
@@ -47,7 +49,12 @@ public class StatusPopupController : MonoBehaviour
         if (magicAttackText != null) magicAttackText.text = $"まほうこうげき  {stats.magicAttack}";
         if (magicDefenseText != null) magicDefenseText.text = $"まほうぼうぎょ  {stats.magicDefense}";
         if (speedText != null) speedText.text = $"すばやさ  {stats.speed}";
-        if (luckText != null) luckText.text = $"うん  {stats.luck}";
         if (expText != null) expText.text = $"EXP  {stats.exp} / {stats.expToNext}";
+
+        if (radarChart != null)
+        {
+            float[] values = { stats.attack, stats.defense, stats.magicAttack, stats.magicDefense, stats.speed };
+            radarChart.Render(values, radarChartMaxValue, new Color(0.3f, 0.85f, 0.9f, 0.4f), new Color(0.3f, 0.85f, 0.9f, 1f), new Color(1f, 1f, 1f, 0.25f));
+        }
     }
 }
