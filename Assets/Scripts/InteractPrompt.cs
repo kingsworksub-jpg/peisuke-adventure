@@ -1,25 +1,30 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class InteractPrompt : MonoBehaviour
 {
     public Transform player;
     public float radius = 1.2f;
     public float fadeSpeed = 4f;
-    public Image icon;
+    public float tapRadius = 0.5f;
 
-    CanvasGroup canvasGroup;
+    public PeisukeStats snackStats;
+    public SnackEffect snackEffect;
+
+    public SpeechBubbleEffect speechBubble;
+    public string speechMessage;
+
+    SpriteRenderer sr;
 
     void Awake()
     {
-        canvasGroup = GetComponent<CanvasGroup>();
-        if (canvasGroup == null) canvasGroup = gameObject.AddComponent<CanvasGroup>();
-        canvasGroup.alpha = 0f;
-        canvasGroup.blocksRaycasts = false;
-        canvasGroup.interactable = false;
-
-        if (icon != null && icon.sprite == null)
-            icon.sprite = IconSprites.GenerateCloudBubble();
+        sr = GetComponent<SpriteRenderer>();
+        if (sr == null) sr = gameObject.AddComponent<SpriteRenderer>();
+        sr.sprite = IconSprites.GenerateCloudBubble();
+        sr.sortingOrder = 10;
+        var c = sr.color;
+        c.a = 0f;
+        sr.color = c;
     }
 
     void Update()
@@ -28,9 +33,35 @@ public class InteractPrompt : MonoBehaviour
         float dist = Vector2.Distance(player.position, transform.position);
         bool inRange = dist <= radius;
 
+        var c = sr.color;
         float target = inRange ? 1f : 0f;
-        canvasGroup.alpha = Mathf.MoveTowards(canvasGroup.alpha, target, fadeSpeed * Time.deltaTime);
-        canvasGroup.blocksRaycasts = inRange;
-        canvasGroup.interactable = inRange;
+        c.a = Mathf.MoveTowards(c.a, target, fadeSpeed * Time.deltaTime);
+        sr.color = c;
+
+        if (inRange && c.a > 0.5f && Input.GetMouseButtonDown(0))
+        {
+            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+                return;
+
+            var cam = Camera.main;
+            if (cam == null) return;
+            Vector3 worldPt = cam.ScreenToWorldPoint(Input.mousePosition);
+            worldPt.z = transform.position.z;
+            if (Vector2.Distance(worldPt, transform.position) <= tapRadius)
+                OnTapped();
+        }
+    }
+
+    void OnTapped()
+    {
+        if (snackStats != null)
+        {
+            snackStats.CollectSnack();
+            if (snackEffect != null) snackEffect.PlaySnack();
+        }
+        if (speechBubble != null)
+        {
+            speechBubble.Say(speechMessage);
+        }
     }
 }
