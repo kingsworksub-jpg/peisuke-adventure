@@ -252,6 +252,7 @@ MonoBehaviour:
   player: {fileID: 2013358121}
   radius: 1.2
   fadeSpeed: 4
+  icon: {fileID: 1037439148}
 --- !u!225 &43682480
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2137,6 +2138,7 @@ MonoBehaviour:
   player: {fileID: 2013358121}
   radius: 1.2
   fadeSpeed: 4
+  icon: {fileID: 591457642}
 --- !u!225 &425323827
 CanvasGroup:
   m_ObjectHideFlags: 0

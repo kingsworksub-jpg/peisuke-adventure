@@ -6,6 +6,7 @@ public class InteractPrompt : MonoBehaviour
     public Transform player;
     public float radius = 1.2f;
     public float fadeSpeed = 4f;
+    public Image icon;
 
     CanvasGroup canvasGroup;
 
@@ -16,6 +17,9 @@ public class InteractPrompt : MonoBehaviour
         canvasGroup.alpha = 0f;
         canvasGroup.blocksRaycasts = false;
         canvasGroup.interactable = false;
+
+        if (icon != null && icon.sprite == null)
+            icon.sprite = IconSprites.GenerateCloudBubble();
     }
 
     void Update()
