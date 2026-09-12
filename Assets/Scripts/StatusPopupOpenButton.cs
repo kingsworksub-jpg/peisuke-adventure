@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class StatusPopupOpenButton : MonoBehaviour, IPointerClickHandler
+public class StatusPopupOpenButton : MonoBehaviour, IPointerDownHandler
 {
     public StatusPopupController controller;
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
         controller.Toggle();
     }

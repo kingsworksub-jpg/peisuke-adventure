@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class GameOverRetryButton : MonoBehaviour, IPointerClickHandler
+public class GameOverRetryButton : MonoBehaviour, IPointerDownHandler
 {
     public GameOverController controller;
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
         controller.Retry();
     }

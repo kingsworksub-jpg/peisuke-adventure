@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class StatusPopupCloseButton : MonoBehaviour, IPointerClickHandler
+public class StatusPopupCloseButton : MonoBehaviour, IPointerDownHandler
 {
     public StatusPopupController controller;
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
         controller.Close();
     }
