@@ -333,7 +333,7 @@ MonoBehaviour:
   - {fileID: 7951460311335413398, guid: 740e442764edf274a8746d37b638cda9, type: 3}
   - {fileID: 4493796295289170120, guid: 740e442764edf274a8746d37b638cda9, type: 3}
   - {fileID: -5643129898191336906, guid: 740e442764edf274a8746d37b638cda9, type: 3}
-  frameDuration: 0.24
+  frameDuration: 0.48
   snackStats: {fileID: 0}
   snackEffect: {fileID: 0}
   speechBubble: {fileID: 2013358125}
@@ -6172,7 +6172,7 @@ MonoBehaviour:
   - {fileID: 7951460311335413398, guid: 740e442764edf274a8746d37b638cda9, type: 3}
   - {fileID: 4493796295289170120, guid: 740e442764edf274a8746d37b638cda9, type: 3}
   - {fileID: -5643129898191336906, guid: 740e442764edf274a8746d37b638cda9, type: 3}
-  frameDuration: 0.24
+  frameDuration: 0.48
   snackStats: {fileID: 2013358122}
   snackEffect: {fileID: 2013358124}
   speechBubble: {fileID: 2013358125}

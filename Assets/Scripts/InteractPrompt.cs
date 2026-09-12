@@ -11,7 +11,7 @@ public class InteractPrompt : MonoBehaviour
     public float iconScale = 3f;
 
     public Sprite[] frames;
-    public float frameDuration = 0.24f;
+    public float frameDuration = 0.48f;
 
     public PeisukeStats snackStats;
     public SnackEffect snackEffect;
