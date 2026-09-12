@@ -32,8 +32,8 @@ public class SpeechBubbleEffect : MonoBehaviour
 
         var canvasGo = new GameObject("SpeechBubble", typeof(Canvas), typeof(CanvasGroup));
         canvasGo.transform.SetParent(anchorT, false);
-        canvasGo.transform.localPosition = new Vector3(0f, 1.95f, 0f);
-        canvasGo.transform.localScale = Vector3.one * 0.01f;
+        canvasGo.transform.localPosition = new Vector3(0f, 1.13f, 0f);
+        canvasGo.transform.localScale = Vector3.one * 0.0045f;
 
         var canvas = canvasGo.GetComponent<Canvas>();
         canvas.renderMode = RenderMode.WorldSpace;
