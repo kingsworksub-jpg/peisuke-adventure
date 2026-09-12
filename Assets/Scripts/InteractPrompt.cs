@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 public class InteractPrompt : MonoBehaviour
 {
     public Transform player;
+    public Transform detectionCenter;
     public float radius = 1.2f;
     public float fadeSpeed = 4f;
     public float tapRadius = 0.5f;
@@ -35,7 +36,8 @@ public class InteractPrompt : MonoBehaviour
     void Update()
     {
         if (player == null) return;
-        float dist = Vector2.Distance(player.position, transform.position);
+        Vector3 center = detectionCenter != null ? detectionCenter.position : transform.position;
+        float dist = Vector2.Distance(player.position, center);
         bool inRange = dist <= radius;
 
         var c = sr.color;
@@ -54,16 +56,15 @@ public class InteractPrompt : MonoBehaviour
             }
         }
 
-        if (inRange && c.a > 0.5f && Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
-                return;
-
+            bool overUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
             var cam = Camera.main;
-            if (cam == null) return;
-            Vector3 worldPt = cam.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 worldPt = cam != null ? cam.ScreenToWorldPoint(Input.mousePosition) : Vector3.zero;
             worldPt.z = transform.position.z;
-            if (Vector2.Distance(worldPt, transform.position) <= tapRadius)
+            float tapDist = Vector2.Distance(worldPt, transform.position);
+
+            if (inRange && c.a > 0.5f && !overUI && tapDist <= tapRadius)
                 OnTapped();
         }
     }
