@@ -7,11 +7,11 @@ public class InteractPrompt : MonoBehaviour
     public Transform detectionCenter;
     public float radius = 1.2f;
     public float fadeSpeed = 4f;
-    public float tapRadius = 1.3f;
-    public float iconScale = 3f;
+    public float tapRadius = 0.65f;
+    public float iconScale = 1.5f;
 
     public Sprite[] frames;
-    public float frameDuration = 0.48f;
+    public float frameDuration = 1.0f;
 
     public PeisukeStats snackStats;
     public SnackEffect snackEffect;
