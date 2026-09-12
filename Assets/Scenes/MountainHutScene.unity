@@ -326,7 +326,8 @@ MonoBehaviour:
   detectionCenter: {fileID: 189234795}
   radius: 3
   fadeSpeed: 4
-  tapRadius: 0.5
+  tapRadius: 1.3
+  iconScale: 3
   frames:
   - {fileID: -2297356003100555120, guid: 2cb67a9628ea32f4796a234caecad89f, type: 3}
   - {fileID: -1313622784187593632, guid: 2cb67a9628ea32f4796a234caecad89f, type: 3}
@@ -348,7 +349,7 @@ MonoBehaviour:
   snackStats: {fileID: 0}
   snackEffect: {fileID: 0}
   speechBubble: {fileID: 2013358125}
-  speechMessage: "(\u3042\u3063\u3061\u3063\u3061)"
+  speechMessage: "\u3042\u3063\u3061\u3063\u3061\uFF01"
 --- !u!212 &66096708
 SpriteRenderer:
   serializedVersion: 3
@@ -6176,7 +6177,8 @@ MonoBehaviour:
   detectionCenter: {fileID: 442335226}
   radius: 1.7
   fadeSpeed: 4
-  tapRadius: 0.5
+  tapRadius: 1.3
+  iconScale: 3
   frames:
   - {fileID: -2297356003100555120, guid: 2cb67a9628ea32f4796a234caecad89f, type: 3}
   - {fileID: -1313622784187593632, guid: 2cb67a9628ea32f4796a234caecad89f, type: 3}
@@ -6197,8 +6199,8 @@ MonoBehaviour:
   frameDuration: 0.08
   snackStats: {fileID: 2013358122}
   snackEffect: {fileID: 2013358124}
-  speechBubble: {fileID: 0}
-  speechMessage: 
+  speechBubble: {fileID: 2013358125}
+  speechMessage: "\u304A\u3084\u3064\u3052\u3063\u3068\uFF01"
 --- !u!212 &1483269781
 SpriteRenderer:
   serializedVersion: 3

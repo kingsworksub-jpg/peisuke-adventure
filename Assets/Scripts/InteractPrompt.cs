@@ -7,7 +7,8 @@ public class InteractPrompt : MonoBehaviour
     public Transform detectionCenter;
     public float radius = 1.2f;
     public float fadeSpeed = 4f;
-    public float tapRadius = 0.5f;
+    public float tapRadius = 1.3f;
+    public float iconScale = 3f;
 
     public Sprite[] frames;
     public float frameDuration = 0.08f;
@@ -31,6 +32,7 @@ public class InteractPrompt : MonoBehaviour
         var c = sr.color;
         c.a = 0f;
         sr.color = c;
+        transform.localScale = new Vector3(iconScale, iconScale, 1f);
     }
 
     void Update()
