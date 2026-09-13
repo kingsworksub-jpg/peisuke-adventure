@@ -38,7 +38,7 @@ public class PeisukeStats : MonoBehaviour
 
     public const int PoopThreshold = 25;
     public int poopMeter = 0;
-    const float StepLength = 0.8f; // world units per "step" (~one full stride)
+    const float StepLength = 0.4f; // world units per "step" (~one full stride)
     float stepDistanceAccum = 0f;
 
     public int snackCount = 0;

@@ -21,13 +21,13 @@ public class SnackEffect : MonoBehaviour
     {
         var anchor = spawnAnchor != null ? spawnAnchor : transform;
         var go = new GameObject("Snack");
-        go.transform.position = anchor.position + new Vector3(0f, 0.35f, 0f);
+        go.transform.position = anchor.position + new Vector3(0f, 0.175f, 0f);
 
         var sr = go.AddComponent<SpriteRenderer>();
         sr.sprite = snackSprite;
         sr.sortingOrder = 5;
 
-        Vector3 targetScale = new Vector3(0.4f, 0.4f, 1f);
+        Vector3 targetScale = new Vector3(0.2f, 0.2f, 1f);
         go.transform.localScale = Vector3.zero;
 
         float t = 0f;

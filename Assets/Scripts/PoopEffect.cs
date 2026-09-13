@@ -35,13 +35,13 @@ public class PoopEffect : MonoBehaviour
 
         var anchor = spawnAnchor != null ? spawnAnchor : transform;
         var go = new GameObject("Poop");
-        go.transform.position = anchor.position + new Vector3(0f, 0.02f, 0f);
+        go.transform.position = anchor.position + new Vector3(0f, 0.01f, 0f);
 
         var sr = go.AddComponent<SpriteRenderer>();
         sr.sprite = poopSprite;
         sr.sortingOrder = 5;
 
-        Vector3 targetScale = new Vector3(0.42f, 0.42f, 1f);
+        Vector3 targetScale = new Vector3(0.21f, 0.21f, 1f);
         go.transform.localScale = Vector3.zero;
 
         float t = 0f;
