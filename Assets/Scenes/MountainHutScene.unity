@@ -7706,8 +7706,8 @@ PolygonCollider2D:
     m_Paths:
     - - {x: -0.67, y: 0.32}
       - {x: 0.81, y: 0.26}
-      - {x: 0.67, y: -0.32}
-      - {x: -0.81, y: -0.26}
+      - {x: 0.55, y: -0.2}
+      - {x: -0.65, y: -0.15}
   m_UseDelaunayMesh: 1
 --- !u!1 &1956138227
 GameObject:
