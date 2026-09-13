@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 public class InteractPrompt : MonoBehaviour
 {
+    static readonly List<InteractPrompt> all = new List<InteractPrompt>();
+
     public Transform player;
     public Transform detectionCenter;
     public float radius = 1.2f;
@@ -35,19 +38,49 @@ public class InteractPrompt : MonoBehaviour
         transform.localScale = new Vector3(iconScale, iconScale, 1f);
     }
 
+    void OnEnable()
+    {
+        all.Add(this);
+    }
+
+    void OnDisable()
+    {
+        all.Remove(this);
+    }
+
+    float DistanceToPlayer()
+    {
+        Vector3 center = detectionCenter != null ? detectionCenter.position : transform.position;
+        return Vector2.Distance(player.position, center);
+    }
+
     void Update()
     {
         if (player == null) return;
-        Vector3 center = detectionCenter != null ? detectionCenter.position : transform.position;
-        float dist = Vector2.Distance(player.position, center);
+        float dist = DistanceToPlayer();
         bool inRange = dist <= radius;
 
+        bool isNearest = inRange;
+        if (inRange)
+        {
+            foreach (var other in all)
+            {
+                if (other == this || other.player == null) continue;
+                float otherDist = other.DistanceToPlayer();
+                if (otherDist <= other.radius && otherDist < dist)
+                {
+                    isNearest = false;
+                    break;
+                }
+            }
+        }
+
         var c = sr.color;
-        float target = inRange ? 1f : 0f;
+        float target = isNearest ? 1f : 0f;
         c.a = Mathf.MoveTowards(c.a, target, fadeSpeed * Time.deltaTime);
         sr.color = c;
 
-        if (inRange && frames != null && frames.Length > 0)
+        if (isNearest && frames != null && frames.Length > 0)
         {
             frameTimer += Time.deltaTime;
             if (frameTimer >= frameDuration)
@@ -66,7 +99,7 @@ public class InteractPrompt : MonoBehaviour
             worldPt.z = transform.position.z;
             float tapDist = Vector2.Distance(worldPt, transform.position);
 
-            if (inRange && c.a > 0.5f && !overUI && tapDist <= tapRadius)
+            if (isNearest && c.a > 0.5f && !overUI && tapDist <= tapRadius)
                 OnTapped();
         }
     }
