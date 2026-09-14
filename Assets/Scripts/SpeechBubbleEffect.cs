@@ -9,15 +9,15 @@ public class SpeechBubbleEffect : MonoBehaviour
     public float holdDuration = 1.5f;
     public float fadeDuration = 0.4f;
 
-    const int TexWidth = 320;
-    const int TexHeight = 220;
-    const float CoreMinX = 54f;
-    const float CoreMaxX = 300f;
-    const float CoreMinY = 66f;
-    const float CoreMaxY = 200f;
-    const float CoreRadius = 30f;
-    const float BumpRadius = 24f;
-    const int BorderThickness = 6;
+    const int TexWidth = 512;
+    const int TexHeight = 352;
+    const float CoreMinX = 86f;
+    const float CoreMaxX = 480f;
+    const float CoreMinY = 106f;
+    const float CoreMaxY = 320f;
+    const float CoreRadius = 48f;
+    const float BumpRadius = 38f;
+    const int BorderThickness = 10;
 
     Sprite bubbleSprite;
 
@@ -37,7 +37,7 @@ public class SpeechBubbleEffect : MonoBehaviour
 
         var canvasGo = new GameObject("SpeechBubble", typeof(Canvas), typeof(CanvasGroup));
         canvasGo.transform.SetParent(anchorT, false);
-        canvasGo.transform.localPosition = new Vector3(0.35f, 0.78f, 0f);
+        canvasGo.transform.localPosition = new Vector3(0.48f, 0.92f, 0f);
         canvasGo.transform.localScale = Vector3.one * 0.0028f;
 
         var canvas = canvasGo.GetComponent<Canvas>();
@@ -73,15 +73,15 @@ public class SpeechBubbleEffect : MonoBehaviour
         var textComp = textGo.GetComponent<Text>();
         textComp.text = text;
         textComp.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        textComp.fontSize = 64;
+        textComp.fontSize = 128;
         textComp.fontStyle = FontStyle.Bold;
         textComp.alignment = TextAnchor.MiddleCenter;
         textComp.color = Color.black;
         textComp.horizontalOverflow = HorizontalWrapMode.Wrap;
         textComp.verticalOverflow = VerticalWrapMode.Overflow;
         textComp.resizeTextForBestFit = true;
-        textComp.resizeTextMinSize = 20;
-        textComp.resizeTextMaxSize = 64;
+        textComp.resizeTextMinSize = 24;
+        textComp.resizeTextMaxSize = 128;
         textComp.raycastTarget = false;
 
         float t = 0f;
@@ -131,9 +131,9 @@ public class SpeechBubbleEffect : MonoBehaviour
 
         var trail = new (Vector2 pos, float r)[]
         {
-            (new Vector2(CoreMinX - 16, CoreMinY - 22), 14f),
-            (new Vector2(CoreMinX - 32, CoreMinY - 40), 9f),
-            (new Vector2(CoreMinX - 42, CoreMinY - 54), 5.5f),
+            (new Vector2(CoreMinX - 26, CoreMinY - 35), 22f),
+            (new Vector2(CoreMinX - 51, CoreMinY - 64), 14f),
+            (new Vector2(CoreMinX - 67, CoreMinY - 86), 9f),
         };
 
         var tex = new Texture2D(w, h, TextureFormat.RGBA32, false);

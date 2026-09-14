@@ -8238,7 +8238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf1665d8f49a8a74087e1c63f220498e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TopDownWalker
-  moveSpeed: 1.5625
+  moveSpeed: 1.797
   animator: {fileID: 741652426}
   visual: {fileID: 741652424}
   obstacleLayer:
