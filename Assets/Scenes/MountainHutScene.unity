@@ -324,7 +324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InteractPrompt
   player: {fileID: 2013358121}
   detectionCenter: {fileID: 189234795}
-  radius: 1.5
+  radius: 0.7
   fadeSpeed: 4
   tapRadius: 0.325
   iconScale: 0.75
@@ -6494,7 +6494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InteractPrompt
   player: {fileID: 2013358121}
   detectionCenter: {fileID: 442335226}
-  radius: 1.3
+  radius: 0.65
   fadeSpeed: 4
   tapRadius: 0.325
   iconScale: 0.75

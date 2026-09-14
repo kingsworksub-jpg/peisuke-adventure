@@ -81,8 +81,6 @@ public class PoopEffect : MonoBehaviour
         else
         {
             Destroy(go);
-            if (gameOverController != null)
-                gameOverController.TriggerGameOver();
         }
 
         poopActive = false;
