@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SpeechBubbleEffect : MonoBehaviour
 {
@@ -8,10 +9,14 @@ public class SpeechBubbleEffect : MonoBehaviour
     public float holdDuration = 1.5f;
     public float fadeDuration = 0.4f;
 
-    const int TexWidth = 300;
-    const int TexHeight = 170;
-    const int TailHeight = 44;
-    const float CornerRadius = 30f;
+    const int TexWidth = 320;
+    const int TexHeight = 220;
+    const float CoreMinX = 54f;
+    const float CoreMaxX = 300f;
+    const float CoreMinY = 66f;
+    const float CoreMaxY = 200f;
+    const float CoreRadius = 30f;
+    const float BumpRadius = 24f;
     const int BorderThickness = 6;
 
     Sprite bubbleSprite;
@@ -32,8 +37,8 @@ public class SpeechBubbleEffect : MonoBehaviour
 
         var canvasGo = new GameObject("SpeechBubble", typeof(Canvas), typeof(CanvasGroup));
         canvasGo.transform.SetParent(anchorT, false);
-        canvasGo.transform.localPosition = new Vector3(0f, 0.565f, 0f);
-        canvasGo.transform.localScale = Vector3.one * 0.00225f;
+        canvasGo.transform.localPosition = new Vector3(0.35f, 0.78f, 0f);
+        canvasGo.transform.localScale = Vector3.one * 0.0028f;
 
         var canvas = canvasGo.GetComponent<Canvas>();
         canvas.renderMode = RenderMode.WorldSpace;
@@ -61,19 +66,22 @@ public class SpeechBubbleEffect : MonoBehaviour
         var textGo = new GameObject("Text", typeof(RectTransform), typeof(Text));
         textGo.transform.SetParent(canvasGo.transform, false);
         var textRT = textGo.GetComponent<RectTransform>();
-        textRT.anchorMin = new Vector2(0f, (float)TailHeight / TexHeight);
-        textRT.anchorMax = new Vector2(1f, 1f);
-        textRT.offsetMin = new Vector2(18, 6);
-        textRT.offsetMax = new Vector2(-18, -14);
+        textRT.anchorMin = new Vector2(CoreMinX / TexWidth, CoreMinY / TexHeight);
+        textRT.anchorMax = new Vector2(CoreMaxX / TexWidth, CoreMaxY / TexHeight);
+        textRT.offsetMin = new Vector2(10, 6);
+        textRT.offsetMax = new Vector2(-10, -6);
         var textComp = textGo.GetComponent<Text>();
         textComp.text = text;
         textComp.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        textComp.fontSize = 32;
+        textComp.fontSize = 64;
         textComp.fontStyle = FontStyle.Bold;
         textComp.alignment = TextAnchor.MiddleCenter;
         textComp.color = Color.black;
         textComp.horizontalOverflow = HorizontalWrapMode.Wrap;
         textComp.verticalOverflow = VerticalWrapMode.Overflow;
+        textComp.resizeTextForBestFit = true;
+        textComp.resizeTextMinSize = 20;
+        textComp.resizeTextMaxSize = 64;
         textComp.raycastTarget = false;
 
         float t = 0f;
@@ -101,18 +109,32 @@ public class SpeechBubbleEffect : MonoBehaviour
 
     static Sprite GenerateBubbleSprite()
     {
-        int w = TexWidth, h = TexHeight, tailH = TailHeight;
-        float r = CornerRadius;
+        int w = TexWidth, h = TexHeight;
         int b = BorderThickness;
+        float bumpR = BumpRadius;
 
-        Vector2 tailBaseL = new Vector2(w * 0.40f, tailH);
-        Vector2 tailBaseR = new Vector2(w * 0.56f, tailH);
-        Vector2 tailTip = new Vector2(w * 0.30f, 0f);
+        var bumps = new List<Vector2>();
+        for (float x = CoreMinX + bumpR * 0.55f; x <= CoreMaxX - bumpR * 0.55f; x += bumpR * 1.1f)
+        {
+            bumps.Add(new Vector2(x, CoreMaxY));
+            bumps.Add(new Vector2(x, CoreMinY));
+        }
+        for (float y = CoreMinY + bumpR * 0.55f; y <= CoreMaxY - bumpR * 0.55f; y += bumpR * 1.1f)
+        {
+            bumps.Add(new Vector2(CoreMinX, y));
+            bumps.Add(new Vector2(CoreMaxX, y));
+        }
+        bumps.Add(new Vector2(CoreMinX, CoreMinY));
+        bumps.Add(new Vector2(CoreMaxX, CoreMinY));
+        bumps.Add(new Vector2(CoreMinX, CoreMaxY));
+        bumps.Add(new Vector2(CoreMaxX, CoreMaxY));
 
-        Vector2 centroid = (tailBaseL + tailBaseR + tailTip) / 3f;
-        Vector2 innerL = Vector2.Lerp(tailBaseL, centroid, 0.34f);
-        Vector2 innerR = Vector2.Lerp(tailBaseR, centroid, 0.34f);
-        Vector2 innerTip = Vector2.Lerp(tailTip, centroid, 0.34f);
+        var trail = new (Vector2 pos, float r)[]
+        {
+            (new Vector2(CoreMinX - 16, CoreMinY - 22), 14f),
+            (new Vector2(CoreMinX - 32, CoreMinY - 40), 9f),
+            (new Vector2(CoreMinX - 42, CoreMinY - 54), 5.5f),
+        };
 
         var tex = new Texture2D(w, h, TextureFormat.RGBA32, false);
         tex.filterMode = FilterMode.Bilinear;
@@ -127,24 +149,34 @@ public class SpeechBubbleEffect : MonoBehaviour
             {
                 float px = x + 0.5f;
                 float py = y + 0.5f;
+                var p = new Vector2(px, py);
 
-                bool outer = InsideRoundedRect(px, py, 0, tailH, w, h, r)
-                    || (py < tailH + 2f && PointInTriangle(px, py, tailBaseL, tailBaseR, tailTip));
+                bool outer = InsideRoundedRect(px, py, CoreMinX, CoreMinY, CoreMaxX, CoreMaxY, CoreRadius);
+                bool inner = InsideRoundedRect(px, py, CoreMinX + b, CoreMinY + b, CoreMaxX - b, CoreMaxY - b, Mathf.Max(0, CoreRadius - b));
+
+                foreach (var bp in bumps)
+                {
+                    float d = Vector2.Distance(p, bp);
+                    if (d <= bumpR) outer = true;
+                    if (d <= bumpR - b) inner = true;
+                }
+
+                foreach (var t in trail)
+                {
+                    float d = Vector2.Distance(p, t.pos);
+                    if (d <= t.r) outer = true;
+                    if (d <= Mathf.Max(0f, t.r - b * 0.6f)) inner = true;
+                }
 
                 Color32 c = clear;
-                if (outer)
-                {
-                    bool inner = InsideRoundedRect(px, py, b, tailH + b, w - b, h - b, Mathf.Max(0, r - b))
-                        || (py < tailH + 2f && PointInTriangle(px, py, innerL, innerR, innerTip));
-                    c = inner ? fillColor : borderColor;
-                }
+                if (outer) c = inner ? fillColor : borderColor;
                 pixels[y * w + x] = c;
             }
         }
 
         tex.SetPixels32(pixels);
         tex.Apply();
-        return Sprite.Create(tex, new Rect(0, 0, w, h), new Vector2(0.5f, 0f), 100f);
+        return Sprite.Create(tex, new Rect(0, 0, w, h), new Vector2(0.5f, 0.5f), 100f);
     }
 
     static bool InsideRoundedRect(float x, float y, float minX, float minY, float maxX, float maxY, float r)
@@ -155,21 +187,5 @@ public class SpeechBubbleEffect : MonoBehaviour
         if (x < minX + r && y > maxY - r) return Vector2.Distance(new Vector2(x, y), new Vector2(minX + r, maxY - r)) <= r;
         if (x > maxX - r && y > maxY - r) return Vector2.Distance(new Vector2(x, y), new Vector2(maxX - r, maxY - r)) <= r;
         return true;
-    }
-
-    static bool PointInTriangle(float px, float py, Vector2 a, Vector2 b, Vector2 c)
-    {
-        Vector2 p = new Vector2(px, py);
-        float d1 = Sign(p, a, b);
-        float d2 = Sign(p, b, c);
-        float d3 = Sign(p, c, a);
-        bool hasNeg = (d1 < 0) || (d2 < 0) || (d3 < 0);
-        bool hasPos = (d1 > 0) || (d2 > 0) || (d3 > 0);
-        return !(hasNeg && hasPos);
-    }
-
-    static float Sign(Vector2 p1, Vector2 p2, Vector2 p3)
-    {
-        return (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
     }
 }
