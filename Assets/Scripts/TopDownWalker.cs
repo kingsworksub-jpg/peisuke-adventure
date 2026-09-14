@@ -10,9 +10,9 @@ public class TopDownWalker : MonoBehaviour
     public float collisionRadius = 0.125f;
     public PeisukeStats stats;
 
-    const float FrontScale = 0.3635f;
-    const float BackScale = 0.341f;
-    const float SideScale = 0.5f;
+    const float FrontScale = 0.727f;
+    const float BackScale = 0.682f;
+    const float SideScale = 1.0f;
 
     const float JumpHeight = 0.225f;
     const float JumpDuration = 0.45f;
