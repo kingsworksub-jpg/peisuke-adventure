@@ -886,7 +886,7 @@ Transform:
   m_GameObject: {fileID: 187964750}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.845, y: -0.935, z: 0}
+  m_LocalPosition: {x: -1.665, y: -0.388, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -953,7 +953,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.24000001, y: 0.414}
+  m_Size: {x: 1.568, y: 1.009}
   m_EdgeRadius: 0
 --- !u!4 &189234795
 Transform:
@@ -964,7 +964,7 @@ Transform:
   m_GameObject: {fileID: 189234793}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.188, y: -0.022, z: 0}
+  m_LocalPosition: {x: -1.859, y: 1.939, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2212,7 +2212,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.156, y: 0.1}
+  m_Size: {x: 0.4, y: 0.4}
   m_EdgeRadius: 0
 --- !u!4 &442335226
 Transform:
@@ -2223,7 +2223,7 @@ Transform:
   m_GameObject: {fileID: 442335224}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.185, y: 0.37, z: 0}
+  m_LocalPosition: {x: 1.925, y: 0.734, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4213,7 +4213,7 @@ Transform:
   m_GameObject: {fileID: 857594312}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -4.167, z: 0}
+  m_LocalPosition: {x: 0.9, y: -3.3, z: 0}
   m_LocalScale: {x: 0.03125, y: 0.03125, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4852,7 +4852,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 4.11, y: 0.15}
+  m_Size: {x: 5.5, y: 0.3}
   m_EdgeRadius: 0
 --- !u!4 &1036673253
 Transform:
@@ -4862,8 +4862,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1036673251}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.26891983, w: 0.96316254}
-  m_LocalPosition: {x: 1.358, y: -0.914, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.1, y: 3.042, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5831,7 +5831,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.8, y: 0.07}
+  m_Size: {x: 0.3, y: 4.5}
   m_EdgeRadius: 0
 --- !u!4 &1282776272
 Transform:
@@ -5841,8 +5841,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1282776270}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.13398619, w: 0.9909832}
-  m_LocalPosition: {x: 0.6357, y: -2.5158, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.604, y: 0.888, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6697,7 +6697,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.8, y: 0.07}
+  m_Size: {x: 0.3, y: 4.5}
   m_EdgeRadius: 0
 --- !u!4 &1523851939
 Transform:
@@ -6707,8 +6707,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1523851937}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.24446128, w: 0.96965903}
-  m_LocalPosition: {x: -2.3838, y: -2.3705, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.403, y: 0.888, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7822,7 +7822,7 @@ Transform:
   m_GameObject: {fileID: 1950456981}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.23, y: -0.589, z: 0}
+  m_LocalPosition: {x: 1.336, y: 1.239, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7874,10 +7874,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.459, y: 0.371}
-      - {x: 0.498, y: 0.312}
-      - {x: 0.459, y: -0.371}
-      - {x: -0.498, y: -0.313}
+    - - {x: -1.065, y: 0.869}
+      - {x: 1.065, y: 0.869}
+      - {x: 1.065, y: -0.869}
+      - {x: -1.065, y: -0.869}
   m_UseDelaunayMesh: 1
 --- !u!1 &1956138227
 GameObject:
@@ -8109,7 +8109,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 4.2, y: 0.15}
+  m_Size: {x: 5.5, y: 0.3}
   m_EdgeRadius: 0
 --- !u!4 &2008238973
 Transform:
@@ -8119,8 +8119,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2008238971}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.23259673, w: 0.9725733}
-  m_LocalPosition: {x: -2.268, y: -0.7995, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.1, y: -1.266, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8255,7 +8255,7 @@ Transform:
   m_GameObject: {fileID: 2013358117}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.1, y: -1.05, z: 0}
+  m_LocalPosition: {x: -0.1, y: 0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8642,6 +8642,66 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u307C\u3046\u304E\u3087  8"
+--- !u!1 &900000001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 900000002}
+  - component: {fileID: 900000003}
+  m_Layer: 0
+  m_Name: InteractPrompt_Door
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &900000002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900000001}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &900000003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900000001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 897e59951da70fc4e8e545c36169d746, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::InteractPrompt
+  player: {fileID: 2013358121}
+  detectionCenter: {fileID: 900000002}
+  radius: 0.6
+  fadeSpeed: 4
+  tapRadius: 0.4
+  iconScale: 0.75
+  frames:
+  - {fileID: -2189356871946207686, guid: 740e442764edf274a8746d37b638cda9, type: 3}
+  - {fileID: 7951460311335413398, guid: 740e442764edf274a8746d37b638cda9, type: 3}
+  - {fileID: 4493796295289170120, guid: 740e442764edf274a8746d37b638cda9, type: 3}
+  - {fileID: -5643129898191336906, guid: 740e442764edf274a8746d37b638cda9, type: 3}
+  frameDuration: 1
+  snackStats: {fileID: 0}
+  snackEffect: {fileID: 0}
+  speechBubble: {fileID: 2013358125}
+  speechMessage: "まだ外にいく準備が出来ていない…"
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -8662,4 +8722,5 @@ SceneRoots:
   - {fileID: 187964752}
   - {fileID: 2008238973}
   - {fileID: 1036673253}
+  - {fileID: 900000002}
   - {fileID: 857594314}
