@@ -9,15 +9,21 @@ public class SpeechBubbleEffect : MonoBehaviour
     public float holdDuration = 1.5f;
     public float fadeDuration = 0.4f;
 
-    const int TexWidth = 512;
-    const int TexHeight = 352;
-    const float CoreMinX = 86f;
-    const float CoreMaxX = 480f;
-    const float CoreMinY = 106f;
-    const float CoreMaxY = 320f;
-    const float CoreRadius = 48f;
-    const float BumpRadius = 38f;
+    const int TexWidth = 560;
+    const int TexHeight = 460;
+    const float CoreMinX = 95f;
+    const float CoreMaxX = 505f;
+    const float CoreMinY = 110f;
+    const float CoreMaxY = 420f;
+    const float CoreRadius = 50f;
+    const float BumpRadius = 40f;
     const int BorderThickness = 10;
+
+    // Fixed font size shared by every speech-bubble message in the game
+    // (object-examine and Peisuke's own lines alike). Do not use
+    // resizeTextForBestFit here -- it made short and long messages render
+    // at visibly different sizes. See CLAUDE.md "Speech bubble font size".
+    public const int BubbleFontSize = 60;
 
     Sprite bubbleSprite;
 
@@ -73,15 +79,13 @@ public class SpeechBubbleEffect : MonoBehaviour
         var textComp = textGo.GetComponent<Text>();
         textComp.text = text;
         textComp.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        textComp.fontSize = 128;
+        textComp.fontSize = BubbleFontSize;
         textComp.fontStyle = FontStyle.Bold;
         textComp.alignment = TextAnchor.MiddleCenter;
         textComp.color = Color.black;
         textComp.horizontalOverflow = HorizontalWrapMode.Wrap;
         textComp.verticalOverflow = VerticalWrapMode.Overflow;
-        textComp.resizeTextForBestFit = true;
-        textComp.resizeTextMinSize = 24;
-        textComp.resizeTextMaxSize = 128;
+        textComp.resizeTextForBestFit = false;
         textComp.raycastTarget = false;
 
         float t = 0f;
@@ -131,9 +135,9 @@ public class SpeechBubbleEffect : MonoBehaviour
 
         var trail = new (Vector2 pos, float r)[]
         {
-            (new Vector2(CoreMinX - 26, CoreMinY - 35), 22f),
-            (new Vector2(CoreMinX - 51, CoreMinY - 64), 14f),
-            (new Vector2(CoreMinX - 67, CoreMinY - 86), 9f),
+            (new Vector2(CoreMinX - 28, CoreMinY - 38), 24f),
+            (new Vector2(CoreMinX - 55, CoreMinY - 70), 15f),
+            (new Vector2(CoreMinX - 72, CoreMinY - 95), 10f),
         };
 
         var tex = new Texture2D(w, h, TextureFormat.RGBA32, false);
