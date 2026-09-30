@@ -12,10 +12,10 @@ public class KaidoSceneSetup
         string hutPath = "Assets/Scenes/MountainHutScene.unity";
         string kaidoPath = "Assets/Scenes/KaidoScene.unity";
 
-        // 1. Copy MountainPath1Scene or MountainHutScene to KaidoScene if it doesn't exist
+        // 1. Copy MountainHutScene to KaidoScene if it doesn't exist
         if (!System.IO.File.Exists(kaidoPath))
         {
-            System.IO.File.Copy("Assets/Scenes/MountainPath1Scene.unity", kaidoPath, true);
+            System.IO.File.Copy("Assets/Scenes/MountainHutScene.unity", kaidoPath, true);
             AssetDatabase.Refresh();
         }
 
@@ -34,14 +34,14 @@ public class KaidoSceneSetup
         // 3. Setup MountainHutScene bottom exit to point to KaidoScene
         var hutScene = EditorSceneManager.OpenScene(hutPath, OpenSceneMode.Single);
         var roots = hutScene.GetRootGameObjects();
-        var bottomWall = roots.FirstOrDefault(g => g.name == "Obstacle_Wall_GardenBottom");
+        var bottomWall = roots.FirstOrDefault(g => g != null && g.name == "Obstacle_Wall_GardenBottom");
         if (bottomWall != null)
         {
             var col = bottomWall.GetComponent<BoxCollider2D>();
             if (col != null) col.isTrigger = true;
         }
 
-        var exit = roots.FirstOrDefault(g => g.name == "ExitToMountainPath1" || g.name == "ExitToKaido");
+        var exit = roots.FirstOrDefault(g => g != null && (g.name == "ExitToMountainPath1" || g.name == "ExitToKaido"));
         if (exit != null) Object.DestroyImmediate(exit);
 
         var exitGo = new GameObject("ExitToKaido");
@@ -55,31 +55,33 @@ public class KaidoSceneSetup
         EditorSceneManager.MarkSceneDirty(hutScene);
         EditorSceneManager.SaveScene(hutScene);
 
-        // 4. Setup KaidoScene
+        // 4. Setup KaidoScene (Outdoor highway / 街道)
         var kaidoScene = EditorSceneManager.OpenScene(kaidoPath, OpenSceneMode.Single);
-        var kaidoRoots = kaidoScene.GetRootGameObjects();
 
-        // Tint background for Kaido (lively road / dirt road brown-orange tint)
-        var bg = kaidoRoots.FirstOrDefault(g => g.name == "MountainHutBackground" || g.name == "MountainPathBackground" || g.name == "KaidoBackground");
+        // Tint background for Kaido (outdoor dirt road brown-orange tint)
+        var bg = kaidoScene.GetRootGameObjects().FirstOrDefault(g => g != null && (g.name == "MountainHutBackground" || g.name == "MountainPathBackground" || g.name == "KaidoBackground"));
         if (bg != null)
         {
             bg.name = "KaidoBackground";
             var sr = bg.GetComponent<SpriteRenderer>();
             if (sr != null)
             {
-                sr.color = new Color(0.7f, 0.55f, 0.35f, 1f); // Dirt road / highway brown tint
+                sr.color = new Color(0.75f, 0.6f, 0.4f, 1f); // Outdoor dirt road tint
             }
         }
 
-        var kaidoBottomWall = kaidoRoots.FirstOrDefault(g => g.name == "Obstacle_Wall_GardenBottom");
-        if (kaidoBottomWall != null)
+        // Remove indoor furniture from KaidoScene so it's a distinct outdoor road map
+        string[] indoorObjectsToDestroy = new string[] {
+            "Obstacle_Chair", "Obstacle_Fireplace", "Obstacle_Nightstand", "Obstacle_Bed", "CampfireSmall"
+        };
+        foreach (var objName in indoorObjectsToDestroy)
         {
-            var col = kaidoBottomWall.GetComponent<BoxCollider2D>();
-            if (col != null) col.isTrigger = true;
+            var obj = kaidoScene.GetRootGameObjects().FirstOrDefault(g => g != null && g.name == objName);
+            if (obj != null) Object.DestroyImmediate(obj);
         }
 
         // Top exit back to Mountain Hut
-        var hutExit = kaidoRoots.FirstOrDefault(g => g.name == "ExitToMountainHut");
+        var hutExit = kaidoScene.GetRootGameObjects().FirstOrDefault(g => g != null && g.name == "ExitToMountainHut");
         if (hutExit != null) Object.DestroyImmediate(hutExit);
 
         var hutExitGo = new GameObject("ExitToMountainHut");
@@ -89,6 +91,22 @@ public class KaidoSceneSetup
         hutCol.size = new Vector2(4.5f, 0.8f);
         var hutTrigger = hutExitGo.AddComponent<SceneTransitionTrigger>();
         hutTrigger.targetSceneName = "MountainHutScene";
+
+        // Add sign / InteractPrompt for Kaido
+        var sign = kaidoScene.GetRootGameObjects().FirstOrDefault(g => g != null && g.name == "Sign_Kaido");
+        if (sign != null) Object.DestroyImmediate(sign);
+
+        var signGo = new GameObject("Sign_Kaido");
+        signGo.transform.position = new Vector3(0f, 0f, 0f);
+        var signPrompt = signGo.AddComponent<InteractPrompt>();
+        var player = kaidoScene.GetRootGameObjects().FirstOrDefault(g => g != null && g.GetComponent<TopDownWalker>() != null);
+        if (player != null)
+        {
+            signPrompt.player = player.transform;
+        }
+        signPrompt.detectionCenter = signGo.transform;
+        signPrompt.radius = 1.2f;
+        signPrompt.speechMessage = "街道：遠くまで続く広々とした街道だ！";
 
         EditorSceneManager.MarkSceneDirty(kaidoScene);
         EditorSceneManager.SaveScene(kaidoScene);
