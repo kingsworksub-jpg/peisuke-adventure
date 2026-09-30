@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MountainPath1Scene.unity
     guid: fedf93063eb3fa94082c092cd0e4dcdc
+  - enabled: 1
+    path: Assets/Scenes/KaidoScene.unity
+    guid: 00000000000000000000000000000000
   m_configObjects: {}

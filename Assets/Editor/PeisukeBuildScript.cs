@@ -7,7 +7,7 @@ public static class PeisukeBuildScript
 {
     static readonly string[] ScenePaths = new[] {
         "Assets/Scenes/MountainHutScene.unity",
-        "Assets/Scenes/MountainPath1Scene.unity"
+        "Assets/Scenes/KaidoScene.unity"
     };
     const string CampfireSpritePath = "Assets/CharacterRef/Generated/Campfire_Small.png";
 
