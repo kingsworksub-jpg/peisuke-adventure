@@ -6,8 +6,7 @@ using UnityEngine;
 public static class PeisukeBuildScript
 {
     static readonly string[] ScenePaths = new[] {
-        "Assets/Scenes/MountainHutScene.unity",
-        "Assets/Scenes/KaidoScene.unity"
+        "Assets/Scenes/MountainHutScene.unity"
     };
     const string CampfireSpritePath = "Assets/CharacterRef/Generated/Campfire_Small.png";
 
