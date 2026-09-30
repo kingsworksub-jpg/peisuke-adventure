@@ -5,7 +5,10 @@ using UnityEngine;
 
 public static class PeisukeBuildScript
 {
-    const string ScenePath = "Assets/Scenes/MountainHutScene.unity";
+    static readonly string[] ScenePaths = new[] {
+        "Assets/Scenes/MountainHutScene.unity",
+        "Assets/Scenes/MountainPath1Scene.unity"
+    };
     const string CampfireSpritePath = "Assets/CharacterRef/Generated/Campfire_Small.png";
 
     public static void SetupCampfireAndBuild()
@@ -19,7 +22,7 @@ public static class PeisukeBuildScript
         importer.alphaIsTransparency = true;
         importer.SaveAndReimport();
 
-        var scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
+        var scene = EditorSceneManager.OpenScene(ScenePaths[0], OpenSceneMode.Single);
         var sprite = AssetDatabase.LoadAssetAtPath<Sprite>(CampfireSpritePath);
         if (sprite == null)
         {
@@ -57,7 +60,7 @@ public static class PeisukeBuildScript
 
         var buildOptions = new BuildPlayerOptions
         {
-            scenes = new[] { ScenePath },
+            scenes = ScenePaths,
             locationPathName = "Builds/Android/PeisukeAdventure.apk",
             target = BuildTarget.Android,
             options = BuildOptions.None

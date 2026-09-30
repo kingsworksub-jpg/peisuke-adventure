@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MountainHutScene.unity
     guid: 2a79d7b0b88c8f54883a3a5da0179e34
+  - enabled: 1
+    path: Assets/Scenes/MountainPath1Scene.unity
+    guid: fedf93063eb3fa94082c092cd0e4dcdc
   m_configObjects: {}
